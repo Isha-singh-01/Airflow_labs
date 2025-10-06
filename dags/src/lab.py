@@ -14,7 +14,7 @@ def load_data():
         bytes: Serialized data.
     """
 
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/file.csv"))
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), "../data/Mall_Customers.csv"))
     serialized_data = pickle.dumps(df)
     
     return serialized_data
@@ -33,7 +33,7 @@ def data_preprocessing(data):
     """
     df = pickle.loads(data)
     df = df.dropna()
-    clustering_data = df[["BALANCE", "PURCHASES", "CREDIT_LIMIT"]]
+    clustering_data = df[["Age", "Annual Income (k$)", "Spending Score (1-100)"]]    
     min_max_scaler = MinMaxScaler()
     clustering_data_minmax = min_max_scaler.fit_transform(clustering_data)
     clustering_serialized_data = pickle.dumps(clustering_data_minmax)
